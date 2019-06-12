@@ -1,6 +1,7 @@
 FROM microsoft/dotnet:sdk AS build-env
 WORKDIR /app
 
+# Install Node to compile react app
 RUN curl -sL https://deb.nodesource.com/setup_10.x |  bash -
 RUN apt-get install -y nodejs
 
@@ -16,4 +17,6 @@ RUN dotnet publish -c Release -o out
 FROM microsoft/dotnet:aspnetcore-runtime
 WORKDIR /app
 COPY --from=build-env /app/out .
+
+# Run App on Heroku
 CMD ASPNETCORE_URLS=http://*:$PORT dotnet InstagramClone.dll
