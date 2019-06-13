@@ -1,22 +1,14 @@
-import React, { Component } from 'react';
-import { Col, Grid, Row } from 'react-bootstrap';
-import { NavMenu } from './NavMenu';
+import React from "react";
+import { Header } from "./Header";
+import Container from "@material-ui/core/Container";
 
-export class Layout extends Component {
-  displayName = Layout.name
-
-  render() {
-    return (
-      <Grid fluid>
-        <Row>
-          <Col sm={3}>
-            <NavMenu />
-          </Col>
-          <Col sm={9}>
-            {this.props.children}
-          </Col>
-        </Row>
-      </Grid>
-    );
-  }
-}
+export const Layout = props => {
+  return (
+    <div>
+      <Header/>
+      <div style={{height: 120}} ></div>
+      <Container maxWidth="md">{props.children}</Container>
+      <div style={{height: 50}}></div>
+    </div>
+  );
+};
