@@ -4,3 +4,13 @@
         padding-top: 50px;
     }
 }
+
+html, body {
+    height: 100%;
+}
+
+header {
+    box-shadow: none !important;
+    background: white !important;
+    border: 1px solid rgba(0,0,0,0.0975);
+}
