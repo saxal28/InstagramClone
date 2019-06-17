@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
+import Container from "@material-ui/core/Container";
 
 const styles = {
+  container: {
+    paddingTop: 120,
+    paddingBottom: 60
+  },
   card: {
     height: 200,
     backgroundPosition: "center",
@@ -23,12 +28,14 @@ export const PostsPage = () => {
   }, []);
 
   return (
-    <Grid container spacing={3}>
-      {dogs.map(dog => (
-        <Grid item xs={3} key={dog}>
-          <Card style={{background: `url(${dog})`, ...styles.card}} />
-        </Grid>
-      ))}
-    </Grid>
+    <Container maxWidth="md" style={styles.container}>
+      <Grid container spacing={3} className="sdasd">
+        {dogs.map(dog => (
+          <Grid item xs={3} key={dog}>
+            <Card style={{ background: `url(${dog})`, ...styles.card }} />
+          </Grid>
+        ))}
+      </Grid>
+    </Container>
   );
 };

@@ -1,16 +1,45 @@
 @media (max-width: 767px) {
-    /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */
-    body {
-        padding-top: 50px;
-    }
+  /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */
+  body {
+    padding-top: 50px;
+  }
 }
 
-html, body {
-    height: 100%;
+html,
+body {
+  height: 100%;
 }
 
 header {
-    box-shadow: none !important;
-    background: white !important;
-    border: 1px solid rgba(0,0,0,0.0975);
+  box-shadow: none !important;
+  background: white !important;
+  border: 1px solid rgba(0, 0, 0, 0.0975);
+}
+
+.Mui-focused > .MuiOutlinedInput-notchedOutline {
+  border-color: #673ab7 !important;
+}
+
+label.Mui-focused {
+    color: #673ab7 !important;
+    border: 0 !important;
+}
+
+.red {
+   color: rgb(255, 65, 65)
+}
+
+.centered-container {
+    background: red;
+    height: calc(100vh);
+    width: 100% !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: url(https://i.imgur.com/HGYophP.jpg);
+    background-size: cover;
+}
+
+legend {
+    border-bottom: 0 !important;
 }

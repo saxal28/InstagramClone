@@ -35,7 +35,7 @@ namespace InstagramClone
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, BloggingContext context)
         {
             if (env.IsDevelopment())
             {
@@ -46,6 +46,9 @@ namespace InstagramClone
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
+
+            // AUTO-MIGRATES ON STARTUP
+            context.Database.Migrate();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
