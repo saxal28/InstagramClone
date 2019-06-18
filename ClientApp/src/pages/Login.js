@@ -1,10 +1,10 @@
 import React from "react";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
-import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import { useForm } from "../hooks/useForm";
+import { WrappedTextField } from "../components/form/WrappedTextField";
 
 const styles = {
   container: {},
@@ -28,12 +28,12 @@ const styles = {
     padding: "20px 30px"
   },
   buttonRow: {
-      marginTop: 20,
-      textAlign: 'left'
+    marginTop: 20,
+    textAlign: "left"
   },
   loginButton: {
-      backgroundColor: '#673ab7',
-      color: 'white'
+    backgroundColor: "#673ab7",
+    color: "white"
   }
 };
 
@@ -41,14 +41,28 @@ export const LoginPage = () => {
   const { handleSubmit, handleChange, values } = useForm(handleLogin);
 
   const handleLogin = () => {
-    console.log("handle login", values);
+    let url = `${window.origin}/api/token`
+
+    console.log("values", values)
+
+    fetch(url, {
+      method: "POST",
+      body: JSON.stringify(values),
+      headers: {
+        "Content-Type": "application/json"
+      },
+      credentials: "same-origin"
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log("DATA!", data);
+      })
+      .catch(e => console.log("ERROR", e));
   };
 
   const sharedInputProps = {
-    onChange: handleChange,
-    fullWidth: true,
-    margin: "normal",
-    variant: "outlined"
+    values,
+    onChange: handleChange
   };
 
   return (
@@ -60,21 +74,22 @@ export const LoginPage = () => {
           </Typography>
 
           <form noValidate autoComplete="off">
-            <TextField
-              label="Username"
-              name="userName"
-              value={values.userName}
+            <WrappedTextField
+              label="username"
+              name="username"
               {...sharedInputProps}
             />
-            <TextField
-              label="Password"
+
+            <WrappedTextField
+              label="password"
               name="password"
-              value={values.password}
               {...sharedInputProps}
             />
 
             <div style={styles.buttonRow}>
-              <Button style={styles.loginButton} size="large" color="#673ab">Login</Button>
+              <Button style={styles.loginButton} size="large">
+                Login
+              </Button>
             </div>
           </form>
         </Paper>

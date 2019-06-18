@@ -42,11 +42,17 @@
           <e p="components" t="Include">
             <e p="Counter.js" t="Include" />
             <e p="FetchData.js" t="Include" />
+            <e p="form" t="Include">
+              <e p="WrappedTextField.js" t="Include" />
+            </e>
             <e p="Header.js" t="Include" />
             <e p="Home.js" t="Include" />
             <e p="Layout.js" t="Include" />
             <e p="NavMenu.css" t="Include" />
             <e p="NavMenu.js" t="Include" />
+          </e>
+          <e p="hooks" t="Include">
+            <e p="useForm.js" t="Include" />
           </e>
           <e p="images" t="Include">
             <e p="Instadumb.svg" t="Include" />
@@ -54,23 +60,32 @@
           <e p="index.css" t="Include" />
           <e p="index.js" t="Include" />
           <e p="Pages" t="Include">
+            <e p="Login.js" t="Include" />
             <e p="Posts.js" t="Include" />
+            <e p="Register.js" t="Include" />
+          </e>
+          <e p="redux" t="Include">
+            <e p="reducers" t="Include">
+              <e p="authReducer.js" t="Include" />
+            </e>
+            <e p="store.js" t="Include" />
           </e>
           <e p="registerServiceWorker.js" t="Include" />
         </e>
       </e>
       <e p="Controllers" t="Include">
         <e p="SampleDataController.cs" t="Include" />
-        <e p="UsersController.cs" t="Include" />
+        <e p="TokenController.cs" t="Include" />
       </e>
       <e p="Dockerfile" t="Include" />
-      <e p="Helpers" t="Include">
-        <e p="AppSettings.cs" t="Include" />
-      </e>
       <e p="InstagramClone.csproj" t="IncludeRecursive" />
       <e p="Migrations" t="Include">
         <e p="20190612205019_InitialCreate.cs" t="Include" />
         <e p="20190612205019_InitialCreate.Designer.cs" t="Include" />
+        <e p="20190617162013_add-users.cs" t="Include" />
+        <e p="20190617162013_add-users.Designer.cs" t="Include" />
+        <e p="20190617192229_AddUserEmail.cs" t="Include" />
+        <e p="20190617192229_AddUserEmail.Designer.cs" t="Include" />
         <e p="BloggingContextModelSnapshot.cs" t="Include" />
       </e>
       <e p="Models" t="Include">
@@ -84,6 +99,7 @@
           </e>
         </e>
       </e>
+      <e p="package-lock.json" t="Include" />
       <e p="packages" t="ExcludeRecursive" />
       <e p="Pages" t="Include">
         <e p="_ViewImports.cshtml" t="Include" />
@@ -93,9 +109,6 @@
       <e p="Program.cs" t="Include" />
       <e p="Properties" t="Include">
         <e p="launchSettings.json" t="Include" />
-      </e>
-      <e p="Services" t="Include">
-        <e p="UserService.cs" t="Include" />
       </e>
       <e p="Startup.cs" t="Include" />
     </e>
