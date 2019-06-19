@@ -1,7 +1,8 @@
 const USER = "USER"
 
 export function getUserFromStorage() {
-    localStorage.getItem(USER);
+    const user = localStorage.getItem(USER)
+    return JSON.parse(user)
 }
 
 export function deleteUserFromStorage(){
@@ -9,5 +10,6 @@ export function deleteUserFromStorage(){
 }
 
 export function saveUserToStorage(user) {
-    localStorage.setItem(USER, user)
+    let stringified = JSON.stringify(user)
+    localStorage.setItem(USER, stringified)
 }

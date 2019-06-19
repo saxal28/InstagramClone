@@ -5,7 +5,9 @@ import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import { useForm } from "../hooks/useForm";
 import { WrappedTextField } from "../components/form/WrappedTextField";
-import { loginUser } from "../services/authService";
+import { connect } from "react-redux";
+import {withRouter} from "react-router-dom"
+import { reduxHandleLogin } from "../redux/actions/authActions";
 
 const styles = {
   container: {},
@@ -38,16 +40,23 @@ const styles = {
   }
 };
 
-export const LoginPage = () => {
-  const handleLogin = async() => {
-    const data = await loginUser(values);
+function mapStateToProps(state) {
+  return state;
+}
 
-    if (data.errorMessage) {
-      console.log(data.errorMessage);
-    } else {
-      console.log("handle valid login");
-    }
+const mapDispatchToProps = dispatch => {
+  return { 
+    login: values => dispatch(reduxHandleLogin(values)) 
+  };
+};
 
+export const LoginPage = withRouter(connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(props => {
+  const handleLogin = () => {
+    props.login(values);
+    props.history.push("/")
   };
 
   const { handleSubmit, handleChange, values } = useForm(handleLogin);
@@ -92,4 +101,4 @@ export const LoginPage = () => {
       </Container>
     </div>
   );
-};
+}));

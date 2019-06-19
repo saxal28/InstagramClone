@@ -14,7 +14,9 @@
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.17",
     "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
     "rimraf": "^2.6.2",
+    "thunk": "0.0.1",
     "typeface-roboto": "0.0.54"
   },
   "scripts": {

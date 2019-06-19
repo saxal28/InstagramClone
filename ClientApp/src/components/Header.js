@@ -9,11 +9,14 @@ import PersonIcon from "@material-ui/icons/PersonOutline";
 import FavoriteIcon from "@material-ui/icons/FavoriteBorderOutlined";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
+import { connect } from "react-redux";
 
 import CameraIcon from "@material-ui/icons/CameraAlt";
 import { Container } from "@material-ui/core";
 import logo from "../images/Instadumb.svg";
-import {withRouter} from "react-router"
+import { withRouter } from "react-router";
+import { authReducer } from "../redux/reducers/authReducer";
+import { reduxHandleLogout } from "../redux/actions/authActions";
 
 const styles = {
   toolbar: {
@@ -45,68 +48,108 @@ const styles = {
   }
 };
 
-export const Header = withRouter((props) => {
-  console.log('props', props)
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const isOpen = anchorEl !== null;
+// REDUX
+const mapStateToProps = state => {
+  const { user, loggedIn } = state.authReducer || {};
+  return { user, loggedIn };
+};
 
-  const handleAccountMenuClick = e => setAnchorEl(e.currentTarget);
-  const handleClose = () => setAnchorEl(null);
-
-  const handleLogin = () => {
-    props.history.push("/login")
-    handleClose();
+const mapDispatchToProps = dispatch => {
+  return {
+    logout: () => dispatch(reduxHandleLogout())
   };
+};
 
-  const handleRegister = () => {
-    props.history.push("/register")
-    handleClose();
-  };
+// ------------
 
-  return (
-    <div>
-      <AppBar position="fixed" color="default">
-        <Container maxWidth="md">
-          <Toolbar style={styles.toolbar}>
-            <div style={styles.headerSection}>
-              <CameraIcon style={styles.cameraIcon} />
-              <img src={logo} height={30} />
-            </div>
+export const Header = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(
+  withRouter(props => {
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const isOpen = anchorEl !== null;
 
-            <div style={styles.headerSection}>
-              <div style={styles.inputWrapper}>
-                <SearchIcon style={{ marginRight: 5 }} />
-                <InputBase
-                  styles={{ padding: 0 }}
-                  placeholder="Search…"
-                  inputProps={{ "aria-label": "Search" }}
-                />
+    const handleAccountMenuClick = e => setAnchorEl(e.currentTarget);
+    const handleClose = () => setAnchorEl(null);
+
+    const handleLogin = () => {
+      props.history.push("/login");
+      handleClose();
+    };
+
+    const handleRegister = () => {
+      props.history.push("/register");
+      handleClose();
+    };
+
+    const handleLogout = () => {
+      props.logout();
+      handleClose();
+    };
+
+    return (
+      <div>
+        <AppBar position="fixed" color="default">
+          <Container maxWidth="md">
+            <Toolbar style={styles.toolbar}>
+              <div style={styles.headerSection}>
+                <CameraIcon style={styles.cameraIcon} />
+                <img src={logo} height={30} />
               </div>
-            </div>
 
-            <div style={styles.headerSection}>
-              <ExploreIcon style={styles.icon} />
-              <FavoriteIcon style={styles.icon} />
-              <PersonIcon
-                style={styles.icon}
-                onClick={handleAccountMenuClick}
-              />
-              <Menu
-                id="simple-menu"
-                anchorEl={anchorEl}
-                keepMounted
-                open={isOpen}
-                onClose={handleClose}
-              >
-                {/* <MenuItem onClick={handleClose}>Profile</MenuItem> */}
-                {/* <MenuItem onClick={handleClose}>My account</MenuItem> */}
-                <MenuItem onClick={handleLogin}>Login</MenuItem>
-                <MenuItem onClick={handleRegister}>Register</MenuItem>
-              </Menu>
-            </div>
-          </Toolbar>
-        </Container>
-      </AppBar>
-    </div>
-  );
-});
+              {props.loggedIn && (
+                <div style={styles.headerSection}>
+                  <div style={styles.inputWrapper}>
+                    <SearchIcon style={{ marginRight: 5 }} />
+                    <InputBase
+                      styles={{ padding: 0 }}
+                      placeholder="Search…"
+                      inputProps={{ "aria-label": "Search" }}
+                    />
+                  </div>
+                </div>
+              )}
+
+              <div style={styles.headerSection}>
+                {props.loggedIn && (
+                  <span>
+                    <ExploreIcon style={styles.icon} />
+                    <FavoriteIcon style={styles.icon} />
+                  </span>
+                )}
+
+                <PersonIcon
+                  style={styles.icon}
+                  onClick={handleAccountMenuClick}
+                />
+                <Menu
+                  id="simple-menu"
+                  anchorEl={anchorEl}
+                  keepMounted
+                  open={isOpen}
+                  onClose={handleClose}
+                >
+                  {/* <MenuItem onClick={handleClose}>Profile</MenuItem> */}
+                  {/* <MenuItem onClick={handleClose}>My account</MenuItem> */}
+                  {!props.loggedIn && (
+                    <span>
+                      <MenuItem onClick={handleLogin}>Login</MenuItem>
+                      <MenuItem onClick={handleRegister}>Register</MenuItem>
+                    </span>
+                  )}
+
+                  {props.loggedIn && (
+                    <span>
+                      <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                    </span>
+                  )}
+                </Menu>
+              </div>
+            </Toolbar>
+          </Container>
+        </AppBar>
+      </div>
+    );
+  })
+);
