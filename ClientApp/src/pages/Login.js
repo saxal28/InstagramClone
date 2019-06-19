@@ -5,6 +5,7 @@ import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import { useForm } from "../hooks/useForm";
 import { WrappedTextField } from "../components/form/WrappedTextField";
+import { loginUser } from "../services/authService";
 
 const styles = {
   container: {},
@@ -38,27 +39,18 @@ const styles = {
 };
 
 export const LoginPage = () => {
-  const { handleSubmit, handleChange, values } = useForm(handleLogin);
+  const handleLogin = async() => {
+    const data = await loginUser(values);
 
-  const handleLogin = () => {
-    let url = `${window.origin}/api/token`
+    if (data.errorMessage) {
+      console.log(data.errorMessage);
+    } else {
+      console.log("handle valid login");
+    }
 
-    console.log("values", values)
-
-    fetch(url, {
-      method: "POST",
-      body: JSON.stringify(values),
-      headers: {
-        "Content-Type": "application/json"
-      },
-      credentials: "same-origin"
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log("DATA!", data);
-      })
-      .catch(e => console.log("ERROR", e));
   };
+
+  const { handleSubmit, handleChange, values } = useForm(handleLogin);
 
   const sharedInputProps = {
     values,
@@ -87,7 +79,11 @@ export const LoginPage = () => {
             />
 
             <div style={styles.buttonRow}>
-              <Button style={styles.loginButton} size="large">
+              <Button
+                style={styles.loginButton}
+                size="large"
+                onClick={handleSubmit}
+              >
                 Login
               </Button>
             </div>

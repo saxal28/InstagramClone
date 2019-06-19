@@ -22,9 +22,11 @@
           <e p="react" t="IncludeRecursive" />
           <e p="react-bootstrap" t="IncludeRecursive" />
           <e p="react-dom" t="IncludeRecursive" />
+          <e p="react-redux" t="IncludeRecursive" />
           <e p="react-router-bootstrap" t="IncludeRecursive" />
           <e p="react-router-dom" t="IncludeRecursive" />
           <e p="react-scripts" t="IncludeRecursive" />
+          <e p="redux" t="IncludeRecursive" />
           <e p="rimraf" t="IncludeRecursive" />
           <e p="typeface-roboto" t="IncludeRecursive" />
         </e>
@@ -71,13 +73,22 @@
             <e p="store.js" t="Include" />
           </e>
           <e p="registerServiceWorker.js" t="Include" />
+          <e p="services" t="Include">
+            <e p="apiService.js" t="Include" />
+            <e p="authService.js" t="Include" />
+            <e p="localStorageService.js" t="Include" />
+          </e>
         </e>
       </e>
       <e p="Controllers" t="Include">
+        <e p="AuthController.cs" t="Include" />
         <e p="SampleDataController.cs" t="Include" />
         <e p="TokenController.cs" t="Include" />
       </e>
       <e p="Dockerfile" t="Include" />
+      <e p="Errors" t="Include">
+        <e p="ApiError.cs" t="Include" />
+      </e>
       <e p="InstagramClone.csproj" t="IncludeRecursive" />
       <e p="Migrations" t="Include">
         <e p="20190612205019_InitialCreate.cs" t="Include" />
@@ -99,7 +110,6 @@
           </e>
         </e>
       </e>
-      <e p="package-lock.json" t="Include" />
       <e p="packages" t="ExcludeRecursive" />
       <e p="Pages" t="Include">
         <e p="_ViewImports.cshtml" t="Include" />

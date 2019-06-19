@@ -1,8 +1,9 @@
 using System;
-using System.IdentityModel.Tokens.Jwt;
 using System.Text;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+
+using Microsoft.AspNetCore.Authorization;
+using System.IdentityModel.Tokens.Jwt;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
@@ -69,7 +70,7 @@ namespace InstagramClone.Controllers
             if (login.Username == "saxal28" && login.Password == "gatorade2")
             {
                 Console.WriteLine("MATCH!");
-                user = new UserModel {Name = "Alan", Email = "email"};
+                user = new UserModel {FirstName = "Alan", Email = "email"};
             }
 
             return user;
@@ -83,8 +84,21 @@ public class LoginModel
     public string Password { get; set; }
 }
 
+public class RegisterModel
+{
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public string Email { get; set; }
+
+    public string Username { get; set; }
+    public string Password { get; set; }
+}
+
 public class UserModel
 {
-    public string Name { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public string Username { get; set; }
     public string Email { get; set; }
+    public string Token { get; set; }
 }

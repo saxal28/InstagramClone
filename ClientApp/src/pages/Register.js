@@ -39,11 +39,12 @@ const styles = {
 };
 
 export const RegisterPage = () => {
-  const handleLogin = () => {
-    console.log("handle login", values);
+
+  const handleRegister = () => {
+    console.log("handle register", values);
   };
 
-  const { handleSubmit, handleChange, values } = useForm(handleLogin);
+  const { handleSubmit, handleChange, values } = useForm(handleRegister);
 
   const sharedInputProps = {
     values,

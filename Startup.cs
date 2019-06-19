@@ -48,7 +48,7 @@ namespace InstagramClone
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             var connection = "Data Source=app.db";
-            services.AddDbContext<BloggingContext>(options => options.UseSqlite(connection));
+            services.AddDbContext<AppDBContext>(options => options.UseSqlite(connection));
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -59,7 +59,7 @@ namespace InstagramClone
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, BloggingContext context)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, AppDBContext context)
         {
             if (env.IsDevelopment())
             {

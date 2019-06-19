@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace InstagramClone.Models
 {
-    public class BloggingContext : DbContext
+    public class AppDBContext : DbContext
     {
-        public BloggingContext(DbContextOptions<BloggingContext> options)
+        public AppDBContext(DbContextOptions<AppDBContext> options)
             : base(options)
         {
          }
